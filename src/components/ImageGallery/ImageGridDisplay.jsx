@@ -1,6 +1,7 @@
 import { Pagination } from './Pagination';
 import { ImageSkeleton } from './ImageSkeleton';
 import React from 'react';
+import { FrameList } from '../../constants/FrameList';
 
 export const ImageGridDisplay = ({
   currentImg,
@@ -14,6 +15,10 @@ export const ImageGridDisplay = ({
       {currentImg !== -1 ? (
         <ul className="imageGalley__imageGridDisplay__imageGrid">
           {imagesList.slice((currentPage - 1) * 20, 20 * currentPage).map((item, idx) => {
+            const frame = FrameList.find((frameItem) => frameItem.id === item.id);
+            const frameDisplay = frame
+              ? `Frames: ${frame.start} - ${frame.end}`
+              : 'Frame not found';
             return (
               <li key={idx} className="imageGalley__imageGridDisplay__imageGrid__gridItems">
                 <img
@@ -24,6 +29,7 @@ export const ImageGridDisplay = ({
                   }}
                 />
                 <span className="image__number">{item.id}</span>
+                <small style={{ margin: '0 auto' }}>{frameDisplay}</small>
               </li>
             );
           })}
