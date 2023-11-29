@@ -8,8 +8,6 @@ export const ImageGallery = () => {
   const [currentImg, setCurrentImage] = useState(imageArray[0].id);
   const [currentPage, setCurrentPage] = useState(1);
   const [imagesList, setImagesList] = useState(imageArray);
-  const [isRelevance, setIsRelevance] = useState(false);
-  const [relevantImages, setRelevantImages] = useState([]);
 
   return (
     <>
@@ -20,9 +18,6 @@ export const ImageGallery = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           imagesList={imagesList}
-          setRelevantImages={setRelevantImages}
-          relevantImages={relevantImages}
-          isRelevance={isRelevance}
         />
         <ImageFilters
           currentImg={currentImg}
@@ -30,10 +25,6 @@ export const ImageGallery = () => {
           imagesList={imagesList}
           setImagesList={setImagesList}
           setCurrentPage={setCurrentPage}
-          setRelevantImages={setRelevantImages}
-          relevantImages={relevantImages}
-          setIsRelevance={setIsRelevance}
-          isRelevance={isRelevance}
         />
       </section>
     </>
