@@ -1,17 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { GrPowerReset } from 'react-icons/gr';
-import { IoClose } from 'react-icons/io5';
+import React, { useEffect, useState } from 'react';
 import { RiImageAddFill } from 'react-icons/ri';
-import { imageArray } from '../../constants/ImageList';
+import { videoArray } from '../../constants/VideosList';
 
-export const ImageFilters = ({
-  currentImg,
-  setCurrentImage,
-  imagesList,
-  setImagesList,
-  setCurrentPage,
-}) => {
+export const ImageFilters = ({ currentImg, imagesList }) => {
   const [currentImgURL, setCurrentImageURL] = useState('');
+  const [currentVideo, setCurrentVideo] = useState('');
 
   useEffect(() => {
     if (!imagesList) {
@@ -20,44 +13,26 @@ export const ImageFilters = ({
     }
 
     const selectedImg = imagesList.find((img) => img.id === currentImg);
-    setCurrentImageURL(!selectedImg ? '' : selectedImg.image);
-  }, [currentImg]);
+    const selectedVideo = videoArray.find((item) => item.id === currentImg);
+
+    setCurrentVideo(selectedVideo ? selectedVideo.video : ''); // Set current video URL
+
+    setCurrentImageURL(selectedImg ? selectedImg.image : '');
+  }, [currentImg, imagesList]);
 
   return (
     <div className="imageGallery__contentWraps imageSelectDisplay">
+      <p>{currentVideo}</p>
       <div className="imageGallery__imageSelectDisplay__selectedImage">
-        {currentImg !== -1 && (
-          <div className="imageGallery__imageSelectDisplay__selectedImage__imageActionBtns">
-            <button
-              onClick={() => {
-                setImagesList(imageArray);
-                setCurrentPage(1);
-                setCurrentImage(imageArray[0].id);
-              }}
-              className="imageGallery__imageSelectDisplay__selectedImage__imageActionBtns__resetBtn"
-            >
-              <GrPowerReset />
-            </button>
-            <button
-              onClick={() => setCurrentImageURL('')}
-              className="imageGallery__imageSelectDisplay__selectedImage__imageActionBtns__closeBtn"
-            >
-              <IoClose />
-            </button>
-          </div>
-        )}
-
         <div
           style={{ background: currentImg !== -1 && currentImgURL ? 'transparent' : '#efedfc' }}
           className="imageGallery__imageSelectDisplay__selectedImage__imageWrap"
         >
           {currentImg !== -1 && currentImgURL ? (
-            <React.Fragment>
-              <img src={currentImgURL} alt="" />
-              <span className="imageGallery__imageSelectDisplay__selectedImage__imageWrap__number">
-                {currentImg}
-              </span>
-            </React.Fragment>
+            <video controls>
+              <source src={currentVideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           ) : (
             <div className="imageGallery__imageSelectDisplay__selectedImage__noImage">
               <span className="imageGallery__imageSelectDisplay__selectedImage__noImage__noImgIcon">
@@ -73,3 +48,5 @@ export const ImageFilters = ({
     </div>
   );
 };
+
+export default ImageFilters;
