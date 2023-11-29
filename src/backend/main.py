@@ -174,7 +174,7 @@ else:
     ce = [ce for _, ce in cs_ce_pairs]
     fs = [(fs + 1) for fs, _ in fs_fe_pairs]
     print("ce =", ce)
-    print("fs =", fs)
+    print("fs+1 =", fs)
 
     # Merging ce and fs+1 arrays
     merged_array = ce + fs
