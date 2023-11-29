@@ -4,7 +4,7 @@ export const HeaderBar = () => {
   return (
     <header className="topHeader">
       <div className="topHeader__contentWrap">
-        <p className="topHeader__contentWrap__appTitle">Image Retrieval System</p>
+        <p className="topHeader__contentWrap__appTitle">Shot Boundary Detection</p>
         Swanand Wagh
       </div>
     </header>
