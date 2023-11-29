@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { RiImageAddFill } from 'react-icons/ri';
-import { videoArray } from '../../constants/VideosList';
 
 export const ImageFilters = ({ currentImg, imagesList }) => {
   const [currentImgURL, setCurrentImageURL] = useState('');
-  const [currentVideo, setCurrentVideo] = useState('');
 
   useEffect(() => {
     if (!imagesList) {
@@ -13,10 +11,6 @@ export const ImageFilters = ({ currentImg, imagesList }) => {
     }
 
     const selectedImg = imagesList.find((img) => img.id === currentImg);
-    const selectedVideo = videoArray.find((item) => item.id === currentImg);
-
-    setCurrentVideo(selectedVideo ? selectedVideo.video : ''); // Set current video URL
-
     setCurrentImageURL(selectedImg ? selectedImg.image : '');
   }, [currentImg, imagesList]);
 
