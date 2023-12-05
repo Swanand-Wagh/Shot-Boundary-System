@@ -50,7 +50,7 @@ def video_to_histograms(video_path):
         print("Error: Histograms could not be generated.")
         return None
 
-    np.save(f'./files/histograms_array_{file_name}.npy', histograms_array)
+    np.save(f'./histograms_array_{file_name}.npy', histograms_array)
     
     end_time = time.time()
     print("Time taken in seconds : ", (end_time - time_start))
@@ -60,7 +60,7 @@ def video_to_histograms(video_path):
 # Function to load histograms from file or generate if not available
 def load_or_generate_histograms(video_path):
     file_name = video_path.split('/')[-1].split('.')[0]
-    npy_file_path = f'./files/histograms_array_{file_name}.npy'
+    npy_file_path = f'./histograms_array_{file_name}.npy'
 
     if os.path.exists(npy_file_path):
         histograms_array = np.load(npy_file_path)
@@ -187,7 +187,7 @@ else:
     # print("merged array=",merged_array)
 
     # Generate timestamp pairs for display
-    frame_pairs, timestamps_pairs = generate_timestamp_pairs([1091, 1112, 1575, 1618, 1865, 1926, 2332, 2406, 2584, 2676, 3008, 3050, 3200, 3276, 3532, 3551, 3624, 3765, 3838, 3928, 4042, 4300, 4358, 4484, 4561, 4604, 4776, 4892, 4986], 1000, 4999, get_fps(video_path) or 30)
+    frame_pairs, timestamps_pairs = generate_timestamp_pairs(merged_array, 1000, 4999, get_fps(video_path) or 30)
     print("FPS=",get_fps(video_path))
     # print("Frame pairs:", frame_pairs)
     # print("Timestamp pairs:", timestamps_pairs)
