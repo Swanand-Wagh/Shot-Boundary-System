@@ -50,7 +50,7 @@ def video_to_histograms(video_path):
         print("Error: Histograms could not be generated.")
         return None
 
-    np.save(f'./docs/histograms_array_{file_name}.npy', histograms_array)
+    np.save(f'./files/histograms_array_{file_name}.npy', histograms_array)
     
     end_time = time.time()
     print("Time taken in seconds : ", (end_time - time_start))
@@ -60,7 +60,7 @@ def video_to_histograms(video_path):
 # Function to load histograms from file or generate if not available
 def load_or_generate_histograms(video_path):
     file_name = video_path.split('/')[-1].split('.')[0]
-    npy_file_path = f'./docs/histograms_array_{file_name}.npy'
+    npy_file_path = f'./files/histograms_array_{file_name}.npy'
 
     if os.path.exists(npy_file_path):
         histograms_array = np.load(npy_file_path)
