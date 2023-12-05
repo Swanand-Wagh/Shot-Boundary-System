@@ -4,7 +4,7 @@ import pandas as pd
 import time
 import os
 
-video_path = './files/20020924_juve_dk_02a_1.avi'
+video_path = './20020924_juve_dk_02a_1.avi'
 
 # Function to calculate intensity histogram vectorized
 def calculate_intensity_vectorized(rgb_image):
@@ -187,7 +187,6 @@ else:
     # print("merged array=",merged_array)
 
     # Generate timestamp pairs for display
-    frame_pairs, timestamps_pairs = generate_timestamp_pairs(merged_array, 1000, 4999, get_fps(video_path) or 30)
-    print("FPS=",get_fps(video_path))
+    frame_pairs, timestamps_pairs = generate_timestamp_pairs(merged_array, 1000, 4999, get_fps(video_path) or 25)
     # print("Frame pairs:", frame_pairs)
     # print("Timestamp pairs:", timestamps_pairs)
