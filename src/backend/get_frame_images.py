@@ -2,14 +2,14 @@ import cv2
 import os
 
 # Path to your video file
-video_path = './files/20020924_juve_dk_02a_1.avi'
+video_path = './20020924_juve_dk_02a_1.avi'
 
 # Create a directory to save the extracted images
 output_dir = 'images'
 os.makedirs(output_dir, exist_ok=True)
 
 # Frame numbers from the merged_array
-frame_numbers = [1000, 1091, 1112, 1575, 1618, 1865, 1926, 2332, 2406, 2584, 2676, 3008, 3050, 3200, 3276, 3532, 3551, 3624, 3765, 3838, 3928, 4042, 4300, 4358, 4484, 4561, 4604, 4776, 4892, 4986, 4999]
+frame_numbers = [1000, 1091, 1112, 1180, 1575, 1618, 1865, 1926, 2332, 2406, 2584, 2678, 3008, 3050, 3059, 3200, 3277, 3532, 3551, 3625, 3656, 3765, 3838, 3928, 4013, 4042, 4299, 4357, 4358, 4484, 4561, 4608, 4776, 4986]
 
 # Open the video file
 cap = cv2.VideoCapture(video_path)
