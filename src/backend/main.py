@@ -95,27 +95,34 @@ def calculate_pairs(distances: np.ndarray, Tb: float, Ts: float, tor: int):
 
     tor_counter = 0
 
+    candi_sum = 0
     for i in range(len(distances)):
         if distances[i] >= Tb:
-            if fe_candi != -1 and fe_candi - fs_candi >= tor:
-                fs_fe_pairs.append((fs_candi, fe_candi))
+            if fe_candi != -1:
+                if candi_sum >= Tb:
+                    fs_fe_pairs.append((fs_candi, fe_candi))
+                    candi_sum = 0
             cs_ce_pairs.append((i, i + 1))
             fs_candi = -1
             fe_candi = -1
             tor_counter = 0
+            
         elif Ts <= distances[i] < Tb:
             if fs_candi == -1:
                 fs_candi = i
             fe_candi = i
             tor_counter = 0
+            candi_sum += distances[i]
+            
         elif distances[i] < Ts:
             tor_counter += 1
-            if tor_counter >= tor or distances[i] >= Tb:
-                if fe_candi != -1 and fe_candi - fs_candi >= tor:
-                    fs_fe_pairs.append((fs_candi, fe_candi))
+            if tor_counter >= tor:
+                if fe_candi != -1:
+                    if candi_sum >= Tb:
+                        fs_fe_pairs.append((fs_candi, fe_candi))
+                        candi_sum = 0
                 fs_candi = -1
                 fe_candi = -1
-                tor_counter = 0
 
     return cs_ce_pairs, fs_fe_pairs
 
@@ -171,8 +178,8 @@ else:
     # Extract specific indices for display
     ce = [ce for _, ce in cs_ce_pairs]
     fs = [(fs + 1) for fs, _ in fs_fe_pairs]
-    # print("ce =", ce)
-    # print("fs =", fs)
+    print("ce =", ce)
+    print("fs =", fs)
 
     # Merging ce and fs+1 arrays
     merged_array = ce + fs
@@ -181,5 +188,6 @@ else:
 
     # Generate timestamp pairs for display
     frame_pairs, timestamps_pairs = generate_timestamp_pairs([1091, 1112, 1575, 1618, 1865, 1926, 2332, 2406, 2584, 2676, 3008, 3050, 3200, 3276, 3532, 3551, 3624, 3765, 3838, 3928, 4042, 4300, 4358, 4484, 4561, 4604, 4776, 4892, 4986], 1000, 4999, get_fps(video_path) or 30)
+    print("FPS=",get_fps(video_path))
     # print("Frame pairs:", frame_pairs)
-    print("Timestamp pairs:", timestamps_pairs)
+    # print("Timestamp pairs:", timestamps_pairs)
