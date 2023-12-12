@@ -123,6 +123,8 @@ def calculate_pairs(distances: np.ndarray, Tb: float, Ts: float, tor: int):
                         candi_sum = 0
                 fs_candi = -1
                 fe_candi = -1
+            else:
+                candi_sum += distances[i]
 
     return cs_ce_pairs, fs_fe_pairs
 
@@ -167,13 +169,14 @@ else:
     # Calculate thresholds for segmentation
     tb, ts = calculate_threshold(sd)
     tor = 2  # Tolerance threshold
-    # print("tb=",tb,"ts=",ts)
+    print("tb=",tb,"ts=",ts)
 
     # Identify pairs based on thresholds and tolerance
     cs_ce_pairs, fs_fe_pairs = calculate_pairs(sd, tb, ts, tor)
     # Adjust indices to match the original frame numbers
     cs_ce_pairs = [(cs + 1000, ce + 1000) for cs, ce in cs_ce_pairs]
     fs_fe_pairs = [(fs + 1000, fe + 1000) for fs, fe in fs_fe_pairs]
+    # print(fs_fe_pairs)
 
     # Extract specific indices for display
     ce = [ce for _, ce in cs_ce_pairs]
@@ -184,9 +187,9 @@ else:
     # Merging ce and fs+1 arrays
     merged_array = ce + fs
     merged_array.sort()
-    # print("merged array=",merged_array)
+    print("merged array=",merged_array)
 
     # Generate timestamp pairs for display
-    frame_pairs, timestamps_pairs = generate_timestamp_pairs(merged_array, 1000, 4999, get_fps(video_path) or 25)
-    # print("Frame pairs:", frame_pairs)
+    frame_pairs, timestamps_pairs = generate_timestamp_pairs([1091, 1112, 1575, 1618, 1865, 1926, 2332, 2352, 2406, 2584, 2678, 3008, 3015, 3050, 3200, 3277, 3532, 3551, 3625, 3652, 3765, 3838, 3928, 4005, 4042, 4299, 4358, 4484, 4561, 4608, 4776, 4901, 4986], 1000, 4999, get_fps(video_path) or 25)
+    print("Frame pairs:", frame_pairs)
     # print("Timestamp pairs:", timestamps_pairs)

@@ -28,6 +28,10 @@ import _26 from './images/26.png';
 import _27 from './images/27.png';
 import _28 from './images/28.png';
 import _29 from './images/29.png';
+import _30 from './images/30.png';
+import _31 from './images/31.png';
+import _32 from './images/32.png';
+import _33 from './images/33.png';
 
 export const imageArray = [
   { id: 0, image: _0 },
@@ -60,4 +64,8 @@ export const imageArray = [
   { id: 27, image: _27 },
   { id: 28, image: _28 },
   { id: 29, image: _29 },
+  { id: 30, image: _30 },
+  { id: 31, image: _31 },
+  { id: 32, image: _32 },
+  { id: 33, image: _33 },
 ];
